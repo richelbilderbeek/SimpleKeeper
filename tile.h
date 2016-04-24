@@ -2,7 +2,8 @@
 #define TILE_H
 
 enum class tile {
-  heart1, heart2,
+  heart1,
+  heart2,
   wall,
   empty
 };

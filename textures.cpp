@@ -24,11 +24,27 @@ textures::textures()
   //Sprites from bigger picture
   {
     sf::Texture t;
-    if (!t.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(640,697,16,16)))
+    if (!t.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(754,858,16,16)))
     {
       assert(!"Should not get here");
     }
     m_textures.insert(std::make_pair(texture_type::empty, t));
+  }
+  {
+    sf::Texture t;
+    if (!t.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(640,697,16,16)))
+    {
+      assert(!"Should not get here");
+    }
+    m_textures.insert(std::make_pair(texture_type::floor, t));
+  }
+  {
+    sf::Texture t;
+    if (!t.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(280,148,16,16)))
+    {
+      assert(!"Should not get here");
+    }
+    m_textures.insert(std::make_pair(texture_type::hole, t));
   }
   {
     sf::Texture t;
@@ -37,6 +53,14 @@ textures::textures()
       assert(!"Should not get here");
     }
     m_textures.insert(std::make_pair(texture_type::wall, t));
+  }
+  {
+    sf::Texture t;
+    if (!t.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(261,148,16,16)))
+    {
+      assert(!"Should not get here");
+    }
+    m_textures.insert(std::make_pair(texture_type::water, t));
   }
 }
 

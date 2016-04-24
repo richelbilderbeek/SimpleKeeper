@@ -2,9 +2,13 @@
 #define GAME_H
 
 #include <set>
+
+#include <SFML/Graphics/Sprite.hpp>
+
 #include "command.h"
 #include "cursor.h"
 #include "landscape.h"
+#include "monster.h"
 #include "textures.h"
 
 namespace sf { struct RenderWindow; }
@@ -26,6 +30,7 @@ private:
   cursor m_cursor1;
   cursor m_cursor2;
   landscape m_landscape;
+  std::vector<monster> m_monsters;
   textures m_textures;
 };
 

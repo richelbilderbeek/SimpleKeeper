@@ -3,7 +3,8 @@
 
 ///The players
 enum class player {
-  player1, player2
+  red, //At the left
+  blue //At the right
 };
 
 #endif // PLAYER_H
