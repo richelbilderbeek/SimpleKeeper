@@ -7,6 +7,7 @@
 struct textures;
 namespace sf { struct RenderWindow; }
 
+///The arena
 class landscape
 {
 public:
