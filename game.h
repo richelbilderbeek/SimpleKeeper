@@ -23,7 +23,7 @@ public:
   const cursor& get_cursor1() const noexcept { return m_cursor1; }
   const cursor& get_cursor2() const noexcept { return m_cursor2; }
   const landscape& get_landscape() const noexcept { return m_landscape; }
-  void process_commands() noexcept;
+  void tick() noexcept;
 
 private:
   std::set<command> m_commands;
@@ -32,6 +32,10 @@ private:
   landscape m_landscape;
   std::vector<monster> m_monsters;
   textures m_textures;
+
+  void move_monster(monster& m) noexcept;
+  void move_monsters() noexcept;
+  void process_commands() noexcept;
 };
 
 #endif // GAME_H

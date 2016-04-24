@@ -30,6 +30,21 @@ landscape::landscape(const int n_cols, const int n_rows)
 
 }
 
+bool landscape::can_move(const int x, const int y, const int w, const int h)
+{
+  const int block_left = x / 32;
+  const int block_right = (x + w) / 32;
+  const int block_top = y / 32;
+  const int block_bottom = (y + h) / 32;
+  return
+       get_top(block_left , block_top   ) == texture_type::empty
+    && get_top(block_left , block_bottom) == texture_type::empty
+    && get_top(block_right, block_top   ) == texture_type::empty
+    && get_top(block_right, block_bottom) == texture_type::empty
+  ;
+}
+
+
 void landscape::draw(sf::RenderWindow& w, const textures& ts)
 {
   const int n_rows = get_n_rows();

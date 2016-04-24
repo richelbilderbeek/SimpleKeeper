@@ -12,6 +12,10 @@ class landscape
 {
 public:
   landscape(const int n_cols, const int n_rows);
+
+  ///Can the sprite move here?
+  bool can_move(const int x, const int y, const int w, const int h);
+
   void draw(sf::RenderWindow& w, const textures& ts);
   texture_type get_bottom(const int x, const int y) const;
   texture_type get_top(const int x, const int y) const;

@@ -47,7 +47,7 @@ int main()
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) g.add_command(command::down2);
     if (clock.getElapsedTime().asMilliseconds() < 40) continue;
     clock.restart();
-    g.process_commands();
+    g.tick();
 
     window.clear();
     g.draw(window);

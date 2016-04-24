@@ -34,6 +34,30 @@ void game::draw(sf::RenderWindow& w)
 
 }
 
+void game::move_monster(monster& m) noexcept
+{
+  if (has_direction(m) && m_landscape.can_move(
+      m.x() + m.dx(),
+      m.y() + m.dy(),
+      m.w(),
+      m.h()
+    )
+  )
+  {
+    m.set_pos(m.x() + m.dx(), m.y() + m.dy());
+  }
+  else
+  {
+    m.pick_new_direction();
+  }
+}
+
+
+void game::move_monsters() noexcept
+{
+  for (auto& m: m_monsters) { move_monster(m); }
+}
+
 void game::process_commands() noexcept
 {
   const int n_cols{m_landscape.get_n_cols()};
@@ -47,4 +71,10 @@ void game::process_commands() noexcept
   if (m_commands.count(command::up2   )) m_cursor2.m_pos.y = (m_cursor2.m_pos.y + n_rows - 1) % n_rows;
   if (m_commands.count(command::down2 )) m_cursor2.m_pos.y = (m_cursor2.m_pos.y + n_rows + 1) % n_rows;
   m_commands.clear();
+}
+
+void game::tick() noexcept
+{
+  move_monsters();
+  process_commands();
 }
