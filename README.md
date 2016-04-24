@@ -1,2 +1,11 @@
 # SimpleKeeper
-Simple Dungeon Keeper clone, written in C++ using SFML
+
+Simple Dungeon Keeper clone, written in C++ using SFML.
+
+![SimpleKeeper v0.1](Screenshots/SimpleKeeper_0_1.png)
+
+## Credits
+
+ * Overworld sprites by [Zephiel87](http://www.spriters-resource.com/submitter/Zephiel87)
+ * Dungeon sprites by [Bacon](http://www.spriters-resource.com/submitter/Bacon)
+

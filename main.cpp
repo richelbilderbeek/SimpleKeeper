@@ -4,7 +4,12 @@
 #include <QFile>
 #include <SFML/Graphics.hpp>
 
-enum class tile { wall, empty };
+enum class tile {
+  heart1, heart2,
+  wall,
+  empty
+};
+
 using landscape = std::vector<std::vector<tile>>;
 
 struct cursor
@@ -62,20 +67,29 @@ void draw_landscape(sf::RenderWindow& w, const landscape& s)
   if (n_cols == 0) return;
   const float block_width  = w.getSize().x / n_cols;
   const float block_height = w.getSize().y / n_rows;
+  sf::Texture empty_texture;
+  if (!empty_texture.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(640,697,16,16)))
+  {
+    assert(!"Should not get here");
+  }
+  sf::Texture wall_texture;
+  if (!wall_texture.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(659,678,16,16)))
+  {
+    assert(!"Should not get here");
+  }
 
   for (int y{0}; y!=n_rows; ++y)
   {
     for (int x{0}; x!=n_cols; ++x)
     {
-      sf::RectangleShape r(sf::Vector2f(block_width - 1, block_height - 1));
+      sf::Sprite sprite;
       switch (s[y][x]) {
-        case tile::empty: r.setFillColor(sf::Color::Black); break;
-        case tile::wall: r.setFillColor(sf::Color::Green); break;
+        case tile::empty: sprite.setTexture(empty_texture); break;
+        case tile::wall: sprite.setTexture(wall_texture); break;
       }
-      r.setOutlineColor(sf::Color::Black);
-      r.setOutlineThickness(0.5);
-      r.setPosition(x * block_width, y * block_height);
-      w.draw(r);
+      sprite.setScale(2.0,2.0);
+      sprite.setPosition(x * block_width, y * block_height);
+      w.draw(sprite);
     }
   }
 }
@@ -88,7 +102,7 @@ void draw_cursor(sf::RenderWindow& w, const landscape& s, const cursor& c)
   if (n_cols == 0) return;
   const float block_width  = w.getSize().x / n_cols;
   const float block_height = w.getSize().y / n_rows;
-  sf::RectangleShape r(sf::Vector2f(block_width, block_height));
+  sf::RectangleShape r(sf::Vector2f(block_width - 1, block_height - 1));
   r.setFillColor(sf::Color::Transparent);
   r.setOutlineColor(c.m_color);
   r.setOutlineThickness(2.0);
@@ -102,27 +116,48 @@ void draw_cursor(sf::RenderWindow& w, const landscape& s, const cursor& c)
 int main()
 {
 
-  const int window_height = 640;
-  const int window_width = 960;
+  const int window_height{640};
+  const int window_width{960};
   const int block_width{32};
   const int block_height{32};
-  landscape my_landscape = create_landscape(
-    window_width / block_width,
-    window_height / block_height
-  );
+  const int n_cols{window_width / block_width};
+  const int n_rows{window_height / block_height};
+  landscape my_landscape = create_landscape(n_cols, n_rows);
   cursor cursor1 = create_cursor1();
   cursor cursor2 = create_cursor2();
-  sf::Texture sprite1;
-  if (!sprite1.loadFromFile("../SimpleKeeper/LinkRedFrontSmallShield1.png"))
+  sf::Texture sprite1_texture;
+  if (!sprite1_texture.loadFromFile("../SimpleKeeper/Sprites/LinkRedFrontSmallShield1.png"))
   {
     assert(!"Should not get here");
   }
-  sf::Texture sprite2;
-  if (!sprite2.loadFromFile("../SimpleKeeper/LinkBlueFrontSmallShield1.png"))
+  sf::Texture sprite2_texture;
+  if (!sprite2_texture.loadFromFile("../SimpleKeeper/Sprites/LinkBlueFrontSmallShield1.png"))
   {
     assert(!"Should not get here");
   }
+  sf::Sprite sprite1;
+  sprite1.setTexture(sprite1_texture);
+  sprite1.setPosition(224, 320 + 32);
+  sf::Sprite sprite2;
+  sprite2.setTexture(sprite2_texture);
+  sprite2.setPosition(672, 320 + 32);
 
+  sf::Texture heart1_texture;
+  if (!heart1_texture.loadFromFile("../SimpleKeeper/Sprites/TriforceGround1.png"))
+  {
+    assert(!"Should not get here");
+  }
+  sf::Texture heart2_texture;
+  if (!heart2_texture.loadFromFile("../SimpleKeeper/Sprites/TriforceGround2.png"))
+  {
+    assert(!"Should not get here");
+  }
+  sf::Sprite heart1;
+  heart1.setTexture(heart1_texture);
+  heart1.setPosition(224, 320);
+  sf::Sprite heart2;
+  heart2.setTexture(heart2_texture);
+  heart2.setPosition(672, 320);
 
 
   sf::RenderWindow window(
@@ -132,16 +167,17 @@ int main()
   );
   while(window.isOpen())
   {
+    sf::Clock clock;
     sf::Event event;
 
     while(window.pollEvent(event))
     {
       switch(event.type)
       {
-        case::sf::Event::Closed:
+        case sf::Event::Closed:
           window.close();
           break;
-        case::sf::Event::MouseMoved:
+        case sf::Event::MouseMoved:
         {
           //int mouse_x = event.mouseMove.x;
           //int mouse_y = event.mouseMove.y;
@@ -151,10 +187,23 @@ int main()
           break;
       }
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) cursor1.m_pos.x = (cursor1.m_pos.x + n_cols - 1) % n_cols;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) cursor1.m_pos.x = (cursor1.m_pos.x + n_cols + 1) % n_cols;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) cursor1.m_pos.y = (cursor1.m_pos.y + n_rows - 1) % n_rows;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) cursor1.m_pos.y = (cursor1.m_pos.y + n_rows + 1) % n_rows;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) cursor2.m_pos.x = (cursor2.m_pos.x + n_cols - 1) % n_cols;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) cursor2.m_pos.x = (cursor2.m_pos.x + n_cols + 1) % n_cols;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) cursor2.m_pos.y = (cursor2.m_pos.y + n_rows - 1) % n_rows;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) cursor2.m_pos.y = (cursor2.m_pos.y + n_rows + 1) % n_rows;
+
     window.clear();
     draw_landscape(window, my_landscape);
     draw_cursor(window, my_landscape, cursor1);
     draw_cursor(window, my_landscape, cursor2);
+    window.draw(heart1);
+    window.draw(heart2);
+    window.draw(sprite1);
+    window.draw(sprite2);
     window.display();
   }
 }

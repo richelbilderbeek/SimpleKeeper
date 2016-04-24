@@ -1,4 +1,11 @@
 #!/bin/bash
+cd Sprites
+
+wget http://www.spriters-resource.com/resources/sheets/8/8375.png -O OverworldAll32.png
+convert OverworldAll32.png PNG8:OverworldAll.png
+
+wget http://www.spriters-resource.com/resources/sheets/8/8376.gif -O DungeonsAll32.gif
+convert DungeonsAll32.gif PNG8:DungeonsAll.png
 
 # Red
 wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Front%291.gif -O LinkRedFrontSmallShield.gif
@@ -41,3 +48,11 @@ convert  "LinkBlueLeftSmallShield.gif[0]" PNG8:LinkBlueLeftSmallShield1.png
 convert  "LinkBlueLeftSmallShield.gif[1]" PNG8:LinkBlueLeftSmallShield2.png
 convert  "LinkBlueBack.gif[0]" PNG8:LinkBlueBack1.png
 convert  "LinkBlueBack.gif[1]" PNG8:LinkBlueBack2.png
+
+# Triforce
+wget http://www.videogamesprites.net/Zelda1/Objects/Triforce%20-%20Ground1.gif -O TriforceGround1.gif
+wget http://www.videogamesprites.net/Zelda1/Objects/Triforce%20-%20Ground2.gif  -O TriforceGround2.gif
+convert TriforceGround1.gif PNG8:TriforceGround1.png
+convert TriforceGround2.gif PNG8:TriforceGround2.png
+
+
