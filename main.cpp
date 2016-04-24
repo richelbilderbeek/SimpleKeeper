@@ -37,14 +37,18 @@ int main()
           break;
       }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) g.add_command(command::left1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) g.add_command(command::right1);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) g.add_command(command::up1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) g.add_command(command::right1);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) g.add_command(command::down1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) g.add_command(command::left2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) g.add_command(command::right2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) g.add_command(command::up2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) g.add_command(command::down2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) g.add_command(command::left1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) g.add_command(command::select1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) g.add_command(command::unselect1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::O)) g.add_command(command::up2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::SemiColon )) g.add_command(command::right2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) g.add_command(command::down2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) g.add_command(command::left2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) g.add_command(command::select2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) g.add_command(command::unselect2);
     if (clock.getElapsedTime().asMilliseconds() < 40) continue;
     clock.restart();
     g.tick();

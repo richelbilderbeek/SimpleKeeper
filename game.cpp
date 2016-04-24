@@ -62,6 +62,13 @@ void game::process_commands() noexcept
 {
   const int n_cols{m_landscape.get_n_cols()};
   const int n_rows{m_landscape.get_n_rows()};
+
+  //Select/unselect before move
+  if (m_commands.count(command::select1)) m_landscape.set_selectedness(m_cursor1.m_pos.x, m_cursor1.m_pos.y, 1);
+  if (m_commands.count(command::select2)) m_landscape.set_selectedness(m_cursor2.m_pos.x, m_cursor2.m_pos.y, 2);
+  if (m_commands.count(command::unselect1)) m_landscape.set_selectedness(m_cursor1.m_pos.x, m_cursor1.m_pos.y, 0);
+  if (m_commands.count(command::unselect2)) m_landscape.set_selectedness(m_cursor2.m_pos.x, m_cursor2.m_pos.y, 0);
+
   if (m_commands.count(command::left1 )) m_cursor1.m_pos.x = (m_cursor1.m_pos.x + n_cols - 1) % n_cols;
   if (m_commands.count(command::right1)) m_cursor1.m_pos.x = (m_cursor1.m_pos.x + n_cols + 1) % n_cols;
   if (m_commands.count(command::up1   )) m_cursor1.m_pos.y = (m_cursor1.m_pos.y + n_rows - 1) % n_rows;
@@ -70,6 +77,15 @@ void game::process_commands() noexcept
   if (m_commands.count(command::right2)) m_cursor2.m_pos.x = (m_cursor2.m_pos.x + n_cols + 1) % n_cols;
   if (m_commands.count(command::up2   )) m_cursor2.m_pos.y = (m_cursor2.m_pos.y + n_rows - 1) % n_rows;
   if (m_commands.count(command::down2 )) m_cursor2.m_pos.y = (m_cursor2.m_pos.y + n_rows + 1) % n_rows;
+
+  //Select/unselect after move
+  if (m_commands.count(command::select1)) m_landscape.set_selectedness(m_cursor1.m_pos.x, m_cursor1.m_pos.y, 1);
+  if (m_commands.count(command::select2)) m_landscape.set_selectedness(m_cursor2.m_pos.x, m_cursor2.m_pos.y, 2);
+  if (m_commands.count(command::unselect1)) m_landscape.set_selectedness(m_cursor1.m_pos.x, m_cursor1.m_pos.y, 0);
+  if (m_commands.count(command::unselect2)) m_landscape.set_selectedness(m_cursor2.m_pos.x, m_cursor2.m_pos.y, 0);
+
+
+
   m_commands.clear();
 }
 
