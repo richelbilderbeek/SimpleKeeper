@@ -7,6 +7,28 @@
 enum class tile { wall, empty };
 using landscape = std::vector<std::vector<tile>>;
 
+struct cursor
+{
+  sf::Vector2i m_pos;
+  sf::Color m_color;
+};
+
+cursor create_cursor1()
+{
+  cursor c;
+  c.m_pos = sf::Vector2i(7,10);
+  c.m_color = sf::Color::Red;
+  return c;
+}
+
+cursor create_cursor2()
+{
+  cursor c;
+  c.m_pos = sf::Vector2i(21,10);
+  c.m_color = sf::Color::Blue;
+  return c;
+}
+
 landscape create_landscape(const int n_cols, const int n_rows)
 {
   landscape m(
@@ -45,16 +67,37 @@ void draw_landscape(sf::RenderWindow& w, const landscape& s)
   {
     for (int x{0}; x!=n_cols; ++x)
     {
-      sf::RectangleShape r(sf::Vector2f(block_width, block_height));
+      sf::RectangleShape r(sf::Vector2f(block_width - 1, block_height - 1));
       switch (s[y][x]) {
         case tile::empty: r.setFillColor(sf::Color::Black); break;
-        case tile::wall: r.setFillColor(sf::Color::Red); break;
+        case tile::wall: r.setFillColor(sf::Color::Green); break;
       }
+      r.setOutlineColor(sf::Color::Black);
+      r.setOutlineThickness(0.5);
       r.setPosition(x * block_width, y * block_height);
       w.draw(r);
     }
   }
 }
+
+void draw_cursor(sf::RenderWindow& w, const landscape& s, const cursor& c)
+{
+  const int n_rows = static_cast<int>(s.size());
+  if (n_rows == 0) return;
+  const int n_cols = static_cast<int>(s.front().size());
+  if (n_cols == 0) return;
+  const float block_width  = w.getSize().x / n_cols;
+  const float block_height = w.getSize().y / n_rows;
+  sf::RectangleShape r(sf::Vector2f(block_width, block_height));
+  r.setFillColor(sf::Color::Transparent);
+  r.setOutlineColor(c.m_color);
+  r.setOutlineThickness(2.0);
+  const int x = c.m_pos.x;
+  const int y = c.m_pos.y;
+  r.setPosition(x * block_width, y * block_height);
+  w.draw(r);
+}
+
 
 int main()
 {
@@ -67,6 +110,8 @@ int main()
     window_width / block_width,
     window_height / block_height
   );
+  cursor cursor1 = create_cursor1();
+  cursor cursor2 = create_cursor2();
 
 
   sf::RenderWindow window(
@@ -98,7 +143,8 @@ int main()
 
     window.clear();
     draw_landscape(window, my_landscape);
-    //window.draw(level_sprite);
+    draw_cursor(window, my_landscape, cursor1);
+    draw_cursor(window, my_landscape, cursor2);
     window.display();
   }
 }
