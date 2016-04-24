@@ -112,6 +112,17 @@ int main()
   );
   cursor cursor1 = create_cursor1();
   cursor cursor2 = create_cursor2();
+  sf::Texture sprite1;
+  if (!sprite1.loadFromFile("../SimpleKeeper/LinkRedFrontSmallShield1.png"))
+  {
+    assert(!"Should not get here");
+  }
+  sf::Texture sprite2;
+  if (!sprite2.loadFromFile("../SimpleKeeper/LinkBlueFrontSmallShield1.png"))
+  {
+    assert(!"Should not get here");
+  }
+
 
 
   sf::RenderWindow window(
@@ -140,7 +151,6 @@ int main()
           break;
       }
     }
-
     window.clear();
     draw_landscape(window, my_landscape);
     draw_cursor(window, my_landscape, cursor1);
