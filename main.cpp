@@ -53,8 +53,7 @@ int main()
       if (clock.getElapsedTime().asMilliseconds() < 10) continue;
       clock.restart();
       g.tick();
-
-      window.clear();
+      //window.clear();
       g.draw(window);
       window.display();
     }

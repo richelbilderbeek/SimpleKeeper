@@ -32,7 +32,7 @@ landscape::landscape(const int n_cols, const int n_rows)
 
 }
 
-bool landscape::can_move(const int x, const int y, const int w, const int h)
+bool landscape::can_move(const int x, const int y, const int w, const int h) const
 {
   const int block_left = x / 32;
   const int block_right = (x + w) / 32;
@@ -47,7 +47,7 @@ bool landscape::can_move(const int x, const int y, const int w, const int h)
 }
 
 
-void landscape::draw(sf::RenderWindow& w, const textures& ts)
+void landscape::draw(sf::RenderWindow& w, const textures& ts) const
 {
   const int n_rows = get_n_rows();
   const int n_cols = get_n_cols();

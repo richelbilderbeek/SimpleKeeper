@@ -7,6 +7,7 @@
 #include "texture_type.h"
 
 struct textures;
+struct landscape;
 namespace sf { struct RenderWindow; }
 
 class monster
@@ -31,5 +32,6 @@ private:
 };
 
 bool has_direction(const monster& m) noexcept;
+void move(monster& m, const landscape& s);
 
 #endif // MONSTER_H

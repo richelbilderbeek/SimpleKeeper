@@ -37,20 +37,7 @@ void game::draw(sf::RenderWindow& w)
 
 void game::move_monster(monster& m) noexcept
 {
-  if (has_direction(m) && m_landscape.can_move(
-      m.x() + m.dx(),
-      m.y() + m.dy(),
-      m.w(),
-      m.h()
-    )
-  )
-  {
-    m.set_pos(m.x() + m.dx(), m.y() + m.dy());
-  }
-  else
-  {
-    m.pick_new_direction();
-  }
+  move(m, m_landscape);
 }
 
 
