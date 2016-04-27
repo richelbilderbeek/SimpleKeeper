@@ -20,6 +20,8 @@ public:
   int h() const noexcept { return 32; }
   void pick_new_direction();
   void set_pos(const int x, const int y);
+  void set_texture(const texture_type t);
+  texture_type texture() const noexcept { return m_texture; }
   int w() const noexcept { return 32; }
   int x() const noexcept;
   int y() const noexcept;
@@ -28,6 +30,7 @@ private:
   int m_dy;
   player m_master; //player it is loyal to
   mutable sf::Sprite m_sprite; //Will be updated at draw
+  texture_type m_texture;
   monster_type m_type;
 };
 

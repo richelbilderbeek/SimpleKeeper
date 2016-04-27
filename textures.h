@@ -13,7 +13,8 @@ public:
   const sf::Texture& get(const texture_type t) const;
 private:
   std::map<texture_type, sf::Texture> m_textures;
-
 };
+
+
 
 #endif // TEXTURES_H
