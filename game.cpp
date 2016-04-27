@@ -8,7 +8,8 @@ game::game(const int window_width, const int window_height)
     m_cursor2{create_cursor2()},
     m_landscape(window_width / 32, window_height / 32),
     m_monsters{},
-    m_textures{}
+    m_textures{},
+    m_tick{}
 {
   //Add initial sprites
   {
@@ -91,6 +92,10 @@ void game::process_commands() noexcept
 
 void game::tick() noexcept
 {
+  ++m_tick;
   move_monsters();
-  process_commands();
+  if (m_tick % 4 == 0)
+  {
+    process_commands();
+  }
 }

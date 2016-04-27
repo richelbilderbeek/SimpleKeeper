@@ -1,5 +1,7 @@
 #include "textures.h"
 #include <cassert>
+#include <sstream>
+#include <stdexcept>
 
 textures::textures()
   : m_textures{}
@@ -16,7 +18,11 @@ textures::textures()
     sf::Texture t;
     if (!t.loadFromFile(p.second))
     {
-      assert(!"Should not get here");
+      std::stringstream msg;
+      msg << __func__ << ": could not find file '"
+        << p.second << "'"
+      ;
+      throw std::runtime_error(msg.str());
     }
     m_textures.insert(std::make_pair(p.first, t));
   }
@@ -26,7 +32,11 @@ textures::textures()
     sf::Texture t;
     if (!t.loadFromFile("../SimpleKeeper/Sprites/DungeonsAll.png", sf::IntRect(754,858,16,16)))
     {
-      assert(!"Should not get here");
+      std::stringstream msg;
+      msg << __func__ << ": could not find file '"
+        << "../SimpleKeeper/Sprites/DungeonsAll.png" << "'"
+      ;
+      throw std::runtime_error(msg.str());
     }
     m_textures.insert(std::make_pair(texture_type::empty, t));
   }

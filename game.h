@@ -32,6 +32,7 @@ private:
   landscape m_landscape;
   std::vector<monster> m_monsters;
   textures m_textures;
+  int m_tick; //Number of ticks
 
   void move_monster(monster& m) noexcept;
   void move_monsters() noexcept;
