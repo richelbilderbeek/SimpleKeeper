@@ -11,8 +11,22 @@ enum class texture_type
   heart_blue,
   heart_red,
   hole, //A bottom tile, the stuff you cannot stand on (but can fall though), the stuff where a wall cannot be built on
+  imp_red_back_1,
+  imp_red_back_2,
   imp_red_front_1,
+  imp_red_front_2,
+  imp_red_left_1,
+  imp_red_left_2,
+  imp_red_right_1,
+  imp_red_right_2,
+  imp_blue_back_1,
+  imp_blue_back_2,
   imp_blue_front_1,
+  imp_blue_front_2,
+  imp_blue_left_1,
+  imp_blue_left_2,
+  imp_blue_right_1,
+  imp_blue_right_2,
   question_mark, //To indicate something went wrong
   wall,
   water //A bottom tile, the stuff you cannot stand on (but swim through), the stuff where a wall cannot be built on
