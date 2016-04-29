@@ -32,17 +32,34 @@ landscape::landscape(const int n_cols, const int n_rows)
 
 }
 
-sf::Color attractiveness_to_color(const double a) noexcept
+sf::Color attractiveness_to_color(const double a, const player master) noexcept
 {
-  //Green: attracted
-  if (a > 0.0) {
-    const int green = std::min(static_cast<int>(a * 255.0), 255);
-    return sf::Color(0,green,0,128);
+  if (master == player::blue)
+  {
+    //Blue: attracted
+    if (a > 0.0) {
+      const int blue = std::min(static_cast<int>(a * 255.0), 255);
+      return sf::Color(0,0,blue,128);
+    }
+    //Blue + green: repulsed
+    if (a < 0.0) {
+      const int blue = std::min(static_cast<int>(-a * 255.0), 255);
+      return sf::Color(0,blue,blue,128);
+    }
   }
-  //Red: repulsed
-  if (a < 0.0) {
-    const int red = std::min(static_cast<int>(-a * 255.0), 255);
-    return sf::Color(red,0,0,128);
+  else
+  {
+    assert(master == player::red);
+    //Red: attracted
+    if (a > 0.0) {
+      const int red = std::min(static_cast<int>(a * 255.0), 255);
+      return sf::Color(red,0,0,128);
+    }
+    //Red + green: repulsed
+    if (a < 0.0) {
+      const int red = std::min(static_cast<int>(-a * 255.0), 255);
+      return sf::Color(red,red,0,128);
+    }
   }
   return sf::Color(128,128,128,128);
 }
@@ -100,16 +117,19 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
   //Draw fairy dust (the tendency monsters are attracted to a square)
   if ("draw imp")
   {
-    for (int y{0}; y!=n_rows; ++y)
+    for (const auto master: { player::blue, player::red })
     {
-      for (int x{0}; x!=n_cols; ++x)
+      for (int y{0}; y!=n_rows; ++y)
       {
-        const double a = get_attractiveness(monster_type::imp, x, y);
-        sf::RectangleShape s(sf::Vector2f(32,32));
-        s.setPosition(x * block_width, y * block_height);
-        const sf::Color c = attractiveness_to_color(a);
-        s.setFillColor(c);
-        w.draw(s);
+        for (int x{0}; x!=n_cols; ++x)
+        {
+          const double a = get_attractiveness(monster_type::imp, master, x, y);
+          sf::RectangleShape s(sf::Vector2f(32,32));
+          s.setPosition(x * block_width, y * block_height);
+          const sf::Color c = attractiveness_to_color(a, master);
+          s.setFillColor(c);
+          w.draw(s);
+        }
       }
     }
   }
@@ -141,16 +161,27 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
   }
 }
 
-double landscape::get_attractiveness(const monster_type m, const int x, const int y) const noexcept
+double landscape::get_attractiveness(
+  const monster_type m,
+  const player master,
+  const int x,
+  const int y
+) const noexcept
 {
   assert(m == monster_type::imp);
   assert(y >= 0);
   assert(y < static_cast<int>(m_bottom.size()));
   assert(x >= 0);
   assert(x < static_cast<int>(m_bottom[y].size()));
-  const double fx{static_cast<double>(x) / static_cast<double>(m_bottom[y].size())};
-  const double fy{static_cast<double>(y) / static_cast<double>(m_bottom.size())};
-  return std::sin(fx * 6.28) + std::cos(fy * 6.28);
+  const int n_rows = get_n_rows();
+  const int n_cols = get_n_cols();
+  const int heart_x = (master == player::red ? 1 : 3) * (n_cols / 4);
+  const int heart_y = n_rows / 2;
+  const double dx{static_cast<double>(x - heart_x)};
+  const double dy{static_cast<double>(y - heart_y)};
+  const double d{(dx * dx) + (dy * dy)};
+  const double f{1.0 - (d * 0.025)};
+  return std::max(f, 0.0);
 }
 
 texture_type landscape::get_bottom(const int x, const int y) const
