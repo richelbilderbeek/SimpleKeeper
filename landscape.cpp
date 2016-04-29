@@ -32,6 +32,21 @@ landscape::landscape(const int n_cols, const int n_rows)
 
 }
 
+sf::Color attractiveness_to_color(const double a) noexcept
+{
+  //Green: attracted
+  if (a > 0.0) {
+    const int green = std::min(static_cast<int>(a * 255.0), 255);
+    return sf::Color(0,green,0,128);
+  }
+  //Red: repulsed
+  if (a < 0.0) {
+    const int red = std::min(static_cast<int>(-a * 255.0), 255);
+    return sf::Color(red,0,0,128);
+  }
+  return sf::Color(128,128,128,128);
+}
+
 bool landscape::can_move(const int x, const int y, const int w, const int h) const
 {
   const int block_left = x / 32;
@@ -82,7 +97,22 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
       w.draw(sprite);
     }
   }
-
+  //Draw fairy dust (the tendency monsters are attracted to a square)
+  if ("draw imp")
+  {
+    for (int y{0}; y!=n_rows; ++y)
+    {
+      for (int x{0}; x!=n_cols; ++x)
+      {
+        const double a = get_attractiveness(monster_type::imp, x, y);
+        sf::RectangleShape s(sf::Vector2f(32,32));
+        s.setPosition(x * block_width, y * block_height);
+        const sf::Color c = attractiveness_to_color(a);
+        s.setFillColor(c);
+        w.draw(s);
+      }
+    }
+  }
   //Draw selected
   sf::RectangleShape red(sf::Vector2f(32,32));
   red.setFillColor(sf::Color(255,0,0,128));
@@ -109,6 +139,18 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
       }
     }
   }
+}
+
+double landscape::get_attractiveness(const monster_type m, const int x, const int y) const noexcept
+{
+  assert(m == monster_type::imp);
+  assert(y >= 0);
+  assert(y < static_cast<int>(m_bottom.size()));
+  assert(x >= 0);
+  assert(x < static_cast<int>(m_bottom[y].size()));
+  const double fx{static_cast<double>(x) / static_cast<double>(m_bottom[y].size())};
+  const double fy{static_cast<double>(y) / static_cast<double>(m_bottom.size())};
+  return std::sin(fx * 6.28) + std::cos(fy * 6.28);
 }
 
 texture_type landscape::get_bottom(const int x, const int y) const

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "texture_type.h"
+#include <SFML/Graphics/Color.hpp>
 
 struct textures;
 namespace sf { struct RenderWindow; }
@@ -34,7 +35,12 @@ private:
 
   ///Tile at the top, that what is on the bottom tile, that what can be mined or destroyed
   std::vector<std::vector<texture_type>> m_top;
+
+  double get_attractiveness(const monster_type m, const int x, const int y) const noexcept;
 };
 
+///Convert the attractiveness (the tendency a monster is attracted to that square)
+///to a nice color
+sf::Color attractiveness_to_color(const double a) noexcept;
 
 #endif // LANDSCAPE_H
