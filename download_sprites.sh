@@ -2,6 +2,7 @@
 cd Sprites
 
 # Blue
+if [ ! -e LinkBlueFrontSmallShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Blue%29%20%28Front%291.gif -O LinkBlueFrontSmallShield.gif; fi
 wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Blue%29%20%28Front%291.gif -O LinkBlueFrontSmallShield.gif
 wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Blue%29%20%28Front%292.gif -O LinkBlueFrontBigShield.gif
 wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Blue%29%20%28Left%291.gif -O LinkBlueLeftSmallShield.gif
@@ -17,8 +18,8 @@ wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Back%2
 
 # Overworld
 
-wget http://www.spriters-resource.com/resources/sheets/8/8375.png -O OverworldAll32.png
-wget http://www.spriters-resource.com/resources/sheets/8/8376.gif -O DungeonsAll32.gif
+if [ ! -e LinkBlueFrontSmallShield.gif ]; then wget http://www.spriters-resource.com/resources/sheets/8/8375.png -O OverworldAll32.png; fi
+if [ ! -e DungeonsAll32.gif ]; then wget http://www.spriters-resource.com/resources/sheets/8/8376.gif -O DungeonsAll32.gif; fi
 
 # Red
 wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Front%291.gif -O LinkRedFrontSmallShield.gif
