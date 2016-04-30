@@ -4,6 +4,7 @@
 #include <functional>
 #include <string>
 #include <SFML/System/Clock.hpp>
+#include "game.h"
 
 /*!
  * \brief The game_window class, which displays the SimpleKeeper game and responds to user input
@@ -33,6 +34,7 @@ public:
   void execute();
   int get_total_time_msec() const noexcept { return m_start_time.getElapsedTime().asMilliseconds(); }
 private:
+  game m_game;
   const int m_poll_time_msecs;
   const sf::Clock m_start_time;
   const std::function<bool(const game_window&)> m_stop_condition;

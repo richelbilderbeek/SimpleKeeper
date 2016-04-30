@@ -22,6 +22,7 @@ landscape::landscape(const int n_cols, const int n_rows)
       m_bottom[y][x] = texture_type::floor;
     }
   }
+  /*
   //Create room for dungeon hearts
   for (int y{0}; y!=5; ++y)
   {
@@ -33,6 +34,7 @@ landscape::landscape(const int n_cols, const int n_rows)
   }
   m_top[(n_rows / 2) ][ (1 * (n_cols / 4))] = texture_type::heart_red;
   m_top[(n_rows / 2) ][ (3 * (n_cols / 4))] = texture_type::heart_blue;
+  */
 
   //Initialize attractiveness grids
   {

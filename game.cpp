@@ -1,26 +1,65 @@
 #include "game.h"
+
+#include <cassert>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-game::game(const int window_width, const int window_height)
+game::game(const int n_cols, const int n_rows)
   : m_commands{},
     m_cursor1{create_cursor1()},
     m_cursor2{create_cursor2()},
-    m_landscape(window_width / 32, window_height / 32),
+    m_landscape(n_cols, n_rows),
     m_monsters{},
     m_textures{},
     m_tick{}
 {
-  //Add initial sprites
-  {
-    m_monsters.push_back(monster(monster_type::imp, player::red, 224, 352));
-    m_monsters.push_back(monster(monster_type::imp, player::blue, 672, 352));
-  }
+
 }
 
 void game::add_command(const command& c) noexcept
 {
   m_commands.insert(c);
+}
+
+void game::add_monster(const monster& m)
+{
+  m_monsters.push_back(m);
+}
+
+game create_default_game(const int n_cols, const int n_rows)
+{
+  game g(n_cols, n_rows);
+  g.add_monster(monster(monster_type::imp, player::red, ((1 * n_cols / 4) * 32) + 32, ((n_rows / 2) * 32) + 32));
+  g.add_monster(monster(monster_type::imp, player::blue,((3 * n_cols / 4) * 32) + 32, ((n_rows / 2) * 32) + 32));
+  auto& s = g.get_landscape();
+  auto& top = s.get_top_texture_grid();
+  //Create room for dungeon hearts
+  if (n_cols >= 11 && n_rows >= 5)
+  {
+    for (int y{0}; y!=5; ++y)
+    {
+      const int row{(n_rows / 2) - 2 + y};
+      assert(row >= 0 && row < static_cast<int>(top.size()));
+      for (int x{0}; x!=5; ++x)
+      {
+        const int col_left {(1 * (n_cols / 4)) - 2 + x};
+        const int col_right{(3 * (n_cols / 4)) - 2 + x};
+        assert(col_left  >= 0 && col_left  < static_cast<int>(top[row].size()));
+        assert(col_right >= 0 && col_right < static_cast<int>(top[row].size()));
+        top[row][col_left ] = texture_type::empty;
+        top[row][col_right] = texture_type::empty;
+      }
+    }
+    const int row{(n_rows / 2)};
+    const int col_left {(1 * (n_cols / 4))};
+    const int col_right{(3 * (n_cols / 4))};
+    assert(row >= 0 && row < static_cast<int>(top.size()));
+    assert(col_left  >= 0 && col_left  < static_cast<int>(top[row].size()));
+    assert(col_right >= 0 && col_right < static_cast<int>(top[row].size()));
+    top[row][col_left] = texture_type::heart_red;
+    top[row][col_right] = texture_type::heart_blue;
+  }
+  return g;
 }
 
 void game::draw(sf::RenderWindow& w)
@@ -33,6 +72,16 @@ void game::draw(sf::RenderWindow& w)
   draw_cursor(w, get_cursor1());
   draw_cursor(w, get_cursor2());
 
+}
+
+int game::get_n_cols() const
+{
+  return m_landscape.get_n_cols();
+}
+
+int game::get_n_rows() const noexcept
+{
+  return m_landscape.get_n_rows();
 }
 
 void game::move_monster(monster& m) noexcept

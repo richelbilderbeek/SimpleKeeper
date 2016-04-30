@@ -13,18 +13,19 @@ game_window::game_window(
   const int poll_time_msecs,
   const std::function<bool(const game_window&)> stop_condition,
   const std::string& window_title
-) : m_poll_time_msecs{poll_time_msecs},
+) : m_game{create_default_game(window_width / 32, window_height / 32)},
+    m_poll_time_msecs{poll_time_msecs},
     m_stop_condition{stop_condition},
     m_window_height{window_height},
     m_window_title{window_title},
     m_window_width{window_width}
 {
-  if (m_window_width < 960 || m_window_height < 640)
+  if (m_window_width < 3 * 32 || m_window_height < 3 * 32)
   {
     std::stringstream msg;
     msg << __func__ << ": cannot create a window of "
       << m_window_width << " x " << m_window_height
-      << ", must minimally be 960 x 640"
+      << ", must be at least" << (3 * 32)
     ;
     throw std::invalid_argument(msg.str());
   }
@@ -41,10 +42,11 @@ game_window::game_window(
 
 void game_window::execute()
 {
-  game g(m_window_width, m_window_height);
+  const int n_cols{m_game.get_n_cols()};
+  const int n_rows{m_game.get_n_rows()};
 
   sf::RenderWindow window(
-    sf::VideoMode(m_window_width, m_window_height),
+    sf::VideoMode(n_cols * 32, n_rows * 32),
     m_window_title,
     sf::Style::Titlebar | sf::Style::Close
   );
@@ -65,22 +67,22 @@ void game_window::execute()
           break;
       }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) g.add_command(command::up1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) g.add_command(command::right1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) g.add_command(command::down1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) g.add_command(command::left1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) g.add_command(command::select1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) g.add_command(command::unselect1);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::O)) g.add_command(command::up2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::SemiColon )) g.add_command(command::right2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) g.add_command(command::down2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) g.add_command(command::left2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) g.add_command(command::select2);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) g.add_command(command::unselect2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) m_game.add_command(command::up1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) m_game.add_command(command::right1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) m_game.add_command(command::down1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) m_game.add_command(command::left1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) m_game.add_command(command::select1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) m_game.add_command(command::unselect1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::O)) m_game.add_command(command::up2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::SemiColon )) m_game.add_command(command::right2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) m_game.add_command(command::down2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) m_game.add_command(command::left2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) m_game.add_command(command::select2);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) m_game.add_command(command::unselect2);
     if (clock.getElapsedTime().asMilliseconds() < 10) continue;
     clock.restart();
-    g.tick();
-    g.draw(window);
+    m_game.tick();
+    m_game.draw(window);
     window.display();
   }
 }

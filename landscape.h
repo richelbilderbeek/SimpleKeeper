@@ -26,6 +26,7 @@ public:
   texture_type get_top(const int x, const int y) const;
   int get_n_cols() const noexcept;
   int get_n_rows() const noexcept;
+  std::vector<std::vector<texture_type>>& get_top_texture_grid() noexcept { return m_top; }
   void set_selectedness(const int x, const int y, const int selectedness);
   void set_top(const int x, const int y, const texture_type t);
   void update_attractivenesses() noexcept;
