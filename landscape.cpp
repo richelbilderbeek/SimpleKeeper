@@ -76,10 +76,10 @@ sf::Color attractiveness_to_color(const double a, const player master) noexcept
 
 bool landscape::can_move(const int x, const int y, const int w, const int h) const
 {
-  const int block_left = x / 32;
-  const int block_right = (x + w) / 32;
-  const int block_top = y / 32;
-  const int block_bottom = (y + h) / 32;
+  const int block_left = (x + w - 31) / 32;
+  const int block_right = (x + w - 1) / 32;
+  const int block_top = (y + h - 16) / 32; // -16: only feet (at lower half) are important
+  const int block_bottom = (y + h - 1) / 32;
   return
        get_top(block_left , block_top   ) == texture_type::empty
     && get_top(block_left , block_bottom) == texture_type::empty
@@ -189,22 +189,22 @@ double landscape::get_attractiveness(
   return g[y][x];
 }
 
-texture_type landscape::get_bottom(const int x, const int y) const
+texture_type landscape::get_bottom(const int col, const int row) const
 {
-  assert(y >= 0);
-  assert(y < static_cast<int>(m_bottom.size()));
-  assert(x >= 0);
-  assert(x < static_cast<int>(m_bottom[y].size()));
-  return m_bottom[y][x];
+  assert(row >= 0);
+  assert(row < static_cast<int>(m_bottom.size()));
+  assert(col >= 0);
+  assert(col < static_cast<int>(m_bottom[row].size()));
+  return m_bottom[row][col];
 }
 
-int landscape::get_selectedness(const int x, const int y) const
+int landscape::get_selectedness(const int col, const int row) const
 {
-  assert(y >= 0);
-  assert(y < static_cast<int>(m_selected.size()));
-  assert(x >= 0);
-  assert(x < static_cast<int>(m_selected[y].size()));
-  return m_selected[y][x];
+  assert(row >= 0);
+  assert(row < static_cast<int>(m_selected.size()));
+  assert(col >= 0);
+  assert(col < static_cast<int>(m_selected[row].size()));
+  return m_selected[row][col];
 }
 
 texture_type landscape::get_top(const int x, const int y) const

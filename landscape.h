@@ -21,8 +21,8 @@ public:
 
   void draw(sf::RenderWindow& w, const textures& ts) const;
   double get_attractiveness(const monster_type m, const player master, const int x, const int y) const noexcept;
-  texture_type get_bottom(const int x, const int y) const;
-  int get_selectedness(const int x, const int y) const;
+  texture_type get_bottom(const int col, const int row) const;
+  int get_selectedness(const int col, const int row) const;
   texture_type get_top(const int x, const int y) const;
   int get_n_cols() const noexcept;
   int get_n_rows() const noexcept;
