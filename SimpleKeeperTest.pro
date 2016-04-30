@@ -3,6 +3,9 @@ CONFIG += qt console
 include(SimpleKeeper.pri)
 include(SimpleKeeperTest.pri)
 
+#INCLUDEPATH += ../STL/include
+#INCLUDEPATH += ../STL/include
+
 SOURCES += main_test.cpp
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -Werror
