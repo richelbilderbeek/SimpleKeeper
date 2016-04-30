@@ -2,15 +2,18 @@
 
 Simple Dungeon Keeper clone, written in C++ using SFML.
 
-![SimpleKeeper v0.8](Screenshots/SimpleKeeper_0_8.png)
+![SimpleKeeper v0.9](Screenshots/SimpleKeeper_0_9.png)
 
 ## Credits
 
  * Overworld sprites by [Zephiel87](http://www.spriters-resource.com/submitter/Zephiel87)
  * Dungeon sprites by [Bacon](http://www.spriters-resource.com/submitter/Bacon)
  * Others sprites: [www.videogamesprites.net](http://www.videogamesprites.net/Zelda1)
+ * Music: [zeldauniverse.s3.amazonaws.com](http://zeldauniverse.s3.amazonaws.com/soundtracks/legendofzeldaost/04%20-%20Dungeon.mp3)
 
 ## Older screenshots
+
+![SimpleKeeper v0.8](Screenshots/SimpleKeeper_0_8.png)
 
 ![SimpleKeeper v0.7](Screenshots/SimpleKeeper_0_7.png)
 

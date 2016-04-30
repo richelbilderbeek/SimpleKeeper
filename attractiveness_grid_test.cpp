@@ -1,6 +1,6 @@
 #include "attractiveness_grid.h"
-#include <boost/test/unit_test.hpp>
 #include <sstream>
+#include <boost/test/unit_test.hpp>
 
 BOOST_AUTO_TEST_CASE(attractiveness_grid_diffusion)
 {
