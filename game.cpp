@@ -84,5 +84,6 @@ void game::tick() noexcept
   if (m_tick % 4 == 0)
   {
     process_commands();
+    m_landscape.update_attractivenesses();
   }
 }

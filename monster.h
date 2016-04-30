@@ -18,10 +18,13 @@ public:
   int dx() const noexcept { return m_dx; }
   int dy() const noexcept { return m_dy; }
   int h() const noexcept { return 32; }
-  void pick_new_direction();
+  player master() const noexcept { return m_master; } //player it is loyal to
+  //void pick_new_direction();
+  void set_direction(const int dx, const int dy) noexcept;
   void set_pos(const int x, const int y);
   void set_texture(const texture_type t);
   texture_type texture() const noexcept { return m_texture; }
+  monster_type type() const noexcept { return m_type; }
   int w() const noexcept { return 32; }
   int x() const noexcept;
   int y() const noexcept;

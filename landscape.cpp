@@ -7,10 +7,13 @@
 #include "textures.h"
 
 landscape::landscape(const int n_cols, const int n_rows)
-  : m_bottom(n_rows, std::vector<texture_type>(n_cols)),
+  : m_attract_blue{},
+    m_attract_red{},
+    m_bottom(n_rows, std::vector<texture_type>(n_cols)),
     m_selected(n_rows, std::vector<int>(n_cols, 0)),
     m_top(n_rows, std::vector<texture_type>(n_cols))
 {
+  //Initialize bottom and top grid
   for (int y{0}; y!=n_rows; ++y)
   {
     for (int x{0}; x!=n_cols; ++x)
@@ -19,6 +22,7 @@ landscape::landscape(const int n_cols, const int n_rows)
       m_bottom[y][x] = texture_type::floor;
     }
   }
+  //Create room for dungeon hearts
   for (int y{0}; y!=5; ++y)
   {
     for (int x{0}; x!=5; ++x)
@@ -30,6 +34,12 @@ landscape::landscape(const int n_cols, const int n_rows)
   m_top[(n_rows / 2) ][ (1 * (n_cols / 4))] = texture_type::heart_red;
   m_top[(n_rows / 2) ][ (3 * (n_cols / 4))] = texture_type::heart_blue;
 
+  //Initialize attractiveness grids
+  {
+    attractiveness_grid g(n_rows, std::vector<double>(n_cols, 0.0));
+    m_attract_blue.insert(std::make_pair(monster_type::imp, g));
+    m_attract_red.insert(std::make_pair(monster_type::imp, g));
+  }
 }
 
 sf::Color attractiveness_to_color(const double a, const player master) noexcept
@@ -37,12 +47,12 @@ sf::Color attractiveness_to_color(const double a, const player master) noexcept
   if (master == player::blue)
   {
     //Blue: attracted
-    if (a > 0.0) {
+    if (a > 0.01) {
       const int blue = std::min(static_cast<int>(a * 255.0), 255);
       return sf::Color(0,0,blue,128);
     }
     //Blue + green: repulsed
-    if (a < 0.0) {
+    if (a < -0.01) {
       const int blue = std::min(static_cast<int>(-a * 255.0), 255);
       return sf::Color(0,blue,blue,128);
     }
@@ -51,12 +61,12 @@ sf::Color attractiveness_to_color(const double a, const player master) noexcept
   {
     assert(master == player::red);
     //Red: attracted
-    if (a > 0.0) {
+    if (a > 0.01) {
       const int red = std::min(static_cast<int>(a * 255.0), 255);
       return sf::Color(red,0,0,128);
     }
     //Red + green: repulsed
-    if (a < 0.0) {
+    if (a < -0.01) {
       const int red = std::min(static_cast<int>(-a * 255.0), 255);
       return sf::Color(red,red,0,128);
     }
@@ -115,7 +125,7 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
     }
   }
   //Draw fairy dust (the tendency monsters are attracted to a square)
-  if ("draw imp")
+  if ("draw imp attractivenss grids")
   {
     for (const auto master: { player::blue, player::red })
     {
@@ -169,19 +179,14 @@ double landscape::get_attractiveness(
 ) const noexcept
 {
   assert(m == monster_type::imp);
+  const auto& ags = master == player::blue ? m_attract_blue : m_attract_red;
+  assert(ags.find(m) != ags.end());
+  const auto& g = (*ags.find(m)).second;
   assert(y >= 0);
-  assert(y < static_cast<int>(m_bottom.size()));
+  assert(y < static_cast<int>(g.size()));
   assert(x >= 0);
-  assert(x < static_cast<int>(m_bottom[y].size()));
-  const int n_rows = get_n_rows();
-  const int n_cols = get_n_cols();
-  const int heart_x = (master == player::red ? 1 : 3) * (n_cols / 4);
-  const int heart_y = n_rows / 2;
-  const double dx{static_cast<double>(x - heart_x)};
-  const double dy{static_cast<double>(y - heart_y)};
-  const double d{(dx * dx) + (dy * dy)};
-  const double f{1.0 - (d * 0.025)};
-  return std::max(f, 0.0);
+  assert(x < static_cast<int>(g[y].size()));
+  return g[y][x];
 }
 
 texture_type landscape::get_bottom(const int x, const int y) const
@@ -237,3 +242,35 @@ void landscape::set_selectedness(const int x, const int y, const int selectednes
   }
 }
 
+void landscape::update_attractivenesses() noexcept
+{
+
+  auto& a_blue = (*m_attract_blue.find(monster_type::imp)).second;
+  auto& a_red  = (*m_attract_red.find(monster_type::imp)).second;
+  const int n_cols{get_n_cols()};
+  const int n_rows{get_n_rows()};
+  for (int y{0}; y!=n_rows; ++y)
+  {
+    for (int x{0}; x!=n_cols; ++x)
+    {
+      const auto top = get_top(x,y);
+      if (top != texture_type::wall) continue;
+
+      const auto t = get_selectedness(x,y);
+      if (t == 0) continue;
+      if (t & 1)
+      {
+        a_red[y][x] = 1.0;
+      }
+      if (t & 2)
+      {
+        a_blue[y][x] = 1.0;
+      }
+    }
+  }
+  diffuse(a_blue, 0.1);
+  diffuse(a_red, 0.1);
+  dilute(a_blue, 0.9);
+  dilute(a_red, 0.9);
+
+}
