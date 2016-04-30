@@ -76,7 +76,7 @@ void dilute(attractiveness_grid& g, const double d)
     msg << __func__ << ": grid must have rows";
     throw std::invalid_argument(msg.str());
   }
-  const int n_cols{static_cast<int>(g.size())};
+  const int n_cols{static_cast<int>(g[0].size())};
   if (n_cols == 0)
   {
     std::stringstream msg;

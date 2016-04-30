@@ -242,6 +242,15 @@ void landscape::set_selectedness(const int x, const int y, const int selectednes
   }
 }
 
+void landscape::set_top(const int x, const int y, const texture_type t)
+{
+  assert(y >= 0);
+  assert(y < static_cast<int>(m_selected.size()));
+  assert(x >= 0);
+  assert(x < static_cast<int>(m_selected[y].size()));
+  m_top[y][x] = t;
+}
+
 void landscape::update_attractivenesses() noexcept
 {
 

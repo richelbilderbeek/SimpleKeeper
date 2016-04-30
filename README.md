@@ -2,7 +2,7 @@
 
 Simple Dungeon Keeper clone, written in C++ using SFML.
 
-![SimpleKeeper v0.7](Screenshots/SimpleKeeper_0_7.png)
+![SimpleKeeper v0.8](Screenshots/SimpleKeeper_0_8.png)
 
 ## Credits
 
@@ -11,6 +11,8 @@ Simple Dungeon Keeper clone, written in C++ using SFML.
  * Others sprites: [www.videogamesprites.net](http://www.videogamesprites.net/Zelda1)
 
 ## Older screenshots
+
+![SimpleKeeper v0.7](Screenshots/SimpleKeeper_0_7.png)
 
 ![SimpleKeeper v0.6](Screenshots/SimpleKeeper_0_6.png)
 

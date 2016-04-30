@@ -1,7 +1,10 @@
 #include "monster.h"
+
+#include <cassert>
+#include <SFML/Graphics/RenderWindow.hpp>
+
 #include "landscape.h"
 #include "textures.h"
-#include <SFML/Graphics/RenderWindow.hpp>
 
 monster::monster(
   const monster_type type,
@@ -18,6 +21,24 @@ monster::monster(
   m_sprite.setPosition(x, y);
   set_direction(0,0);
   //pick_new_direction();
+}
+
+void behave(monster& m, landscape& s)
+{
+  if (m.type() == monster_type::imp
+    && s.get_top(
+      ((m.x() + 16) / 32) + m.dx(),
+      ((m.y() + 16)  / 32) + m.dy()
+    ) == texture_type::wall
+  )
+  {
+    //Mining!
+    s.set_top(
+      ((m.x() + 16)  / 32) + m.dx(),
+      ((m.y() + 16)  / 32) + m.dy(),
+      texture_type::empty
+    );
+  }
 }
 
 void monster::draw(sf::RenderWindow& w, const textures& ts) const
@@ -49,8 +70,15 @@ void move(monster& m, const landscape& s)
   if (m.dx() != new_dx || m.dy() != new_dy)
   {
     m.set_direction(new_dx, new_dy);
-    return; //No movement
+    //return; //No movement
   }
+  else
+  {
+    m.set_texture(
+      get_other_texture_type(m.texture())
+    );
+  }
+
   //Horizontal movement
   if (s.can_move(m.x() + m.dx(),
       m.y() + 0,
@@ -61,7 +89,7 @@ void move(monster& m, const landscape& s)
   {
     m.set_pos(m.x() + m.dx(), m.y() + 0);
   }
-  //Verical movement
+  //Vertical movement
   if (s.can_move(m.x() + 0,
       m.y() + m.dy(),
       m.w(),
@@ -71,9 +99,6 @@ void move(monster& m, const landscape& s)
   {
     m.set_pos(m.x() + 0, m.y() + m.dy());
   }
-  m.set_texture(
-    get_other_texture_type(m.texture())
-  );
 }
 
 void monster::set_direction(const int dx, const int dy) noexcept

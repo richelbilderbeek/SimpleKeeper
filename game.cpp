@@ -38,6 +38,7 @@ void game::draw(sf::RenderWindow& w)
 void game::move_monster(monster& m) noexcept
 {
   move(m, m_landscape);
+  behave(m, m_landscape);
 }
 
 

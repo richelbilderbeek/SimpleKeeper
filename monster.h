@@ -37,6 +37,8 @@ private:
   monster_type m_type;
 };
 
+///Let monsters have their behaviors, e.g. mining
+void behave(monster& m, landscape& s);
 bool has_direction(const monster& m) noexcept;
 void move(monster& m, const landscape& s);
 
