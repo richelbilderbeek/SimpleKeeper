@@ -19,11 +19,11 @@ if [ ! -e LinkBlueLeftBigShield.gif ]; then wget http://www.videogamesprites.net
 if [ ! -e LinkBlueBack.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Blue%29%20%28Back%29.gif -O LinkBlueBack.gif; fi
 
 # Green
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Front%291.gif -O LinkGreenFrontSmallShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Front%292.gif -O LinkGreenFrontBigShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Left%291.gif -O LinkGreenLeftSmallShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Left%292.gif -O LinkGreenLeftBigShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Back%29.gif -O LinkGreenBack.gif
+if [ ! -e LinkGreenFrontSmallShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Front%291.gif -O LinkGreenFrontSmallShield.gif; fi
+if [ ! -e LinkGreenFrontBigShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Front%292.gif -O LinkGreenFrontBigShield.gif; fi
+if [ ! -e LinkGreenLeftSmallShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Left%291.gif -O LinkGreenLeftSmallShield.gif; fi
+if [ ! -e LinkGreenLeftBigShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Left%292.gif -O LinkGreenLeftBigShield.gif; fi
+if [ ! -e LinkGreenBack.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Normal%29%20%28Back%29.gif -O LinkGreenBack.gif; fi
 
 # Overworld
 
@@ -31,12 +31,12 @@ if [ ! -e LinkBlueFrontSmallShield.gif ]; then wget http://www.spriters-resource
 if [ ! -e DungeonsAll32.gif ]; then wget http://www.spriters-resource.com/resources/sheets/8/8376.gif -O DungeonsAll32.gif; fi
 
 # Red
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Front%291.gif -O LinkRedFrontSmallShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Front%292.gif -O LinkRedFrontBigShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Left%291.gif -O LinkRedLeftSmallShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Left%292.gif -O LinkRedLeftBigShield.gif
-wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Back%29.gif -O LinkRedBack.gif
+if [ ! -e LinkRedFrontSmallShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Front%291.gif -O LinkRedFrontSmallShield.gif; fi
+if [ ! -e LinkRedFrontBigShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Front%292.gif -O LinkRedFrontBigShield.gif; fi
+if [ ! -e LinkRedLeftSmallShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Left%291.gif -O LinkRedLeftSmallShield.gif; fi
+if [ ! -e LinkRedLeftBigShield.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Left%292.gif -O LinkRedLeftBigShield.gif; fi
+if [ ! -e LinkRedBack.gif ]; then wget http://www.videogamesprites.net/Zelda1/Link/Link%20%28Red%29%20%28Back%29.gif -O LinkRedBack.gif; fi
 
 # Triforce
-wget http://www.videogamesprites.net/Zelda1/Objects/Triforce%20-%20Ground1.gif -O TriforceGround1.gif
-wget http://www.videogamesprites.net/Zelda1/Objects/Triforce%20-%20Ground2.gif  -O TriforceGround2.gif
+if [ ! -e TriforceGround1.gif ]; then wget http://www.videogamesprites.net/Zelda1/Objects/Triforce%20-%20Ground1.gif -O TriforceGround1.gif; fi
+if [ ! -e TriforceGround2.gif ]; then wget http://www.videogamesprites.net/Zelda1/Objects/Triforce%20-%20Ground2.gif -O TriforceGround2.gif; fi
