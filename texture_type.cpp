@@ -9,7 +9,9 @@ texture_type get_other_texture_type(
   switch (t)
   {
      case texture_type::empty: assert(!"Should not get here"); return t;
-     case texture_type::floor: assert(!"Should not get here"); return t;
+     case texture_type::floor1: assert(!"Should not get here"); return t;
+     case texture_type::gems1: assert(!"Should not get here"); return t;
+     case texture_type::gold1: assert(!"Should not get here"); return t;
      case texture_type::heart_blue: assert(!"Should not get here"); return t;
      case texture_type::heart_red: assert(!"Should not get here"); return t;
      case texture_type::hole: assert(!"Should not get here"); return t;
@@ -30,8 +32,8 @@ texture_type get_other_texture_type(
      case texture_type::imp_red_right_1: return texture_type::imp_red_right_2;
      case texture_type::imp_red_right_2: return texture_type::imp_red_right_1;
      case texture_type::question_mark: assert(!"Should not get here"); return t;
-     case texture_type::wall: assert(!"Should not get here"); return t;
-     case texture_type::water: assert(!"Should not get here"); return t;
+     case texture_type::wall1: assert(!"Should not get here"); return t;
+     case texture_type::water1: assert(!"Should not get here"); return t;
   }
   assert(!"Should not get here");
   return t;
@@ -91,16 +93,4 @@ texture_type get_texture_type_red(
   }
   assert(!"Should not get here");
   return texture_type::question_mark;
-}
-
-bool is_small(const texture_type t) noexcept
-{
-  const std::set<texture_type> small = {
-    texture_type::empty,
-    texture_type::floor,
-    texture_type::hole,
-    texture_type::wall,
-    texture_type::water
-  };
-  return small.count(t);
 }

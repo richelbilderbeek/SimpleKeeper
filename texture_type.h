@@ -7,7 +7,9 @@
 enum class texture_type
 {
   empty, //Transparent
-  floor, //A bottom tile, the stuff you stand on, the stuff where a wall is built on
+  floor1, //A bottom tile, the stuff you stand on, the stuff where a wall is built on
+  gems1,
+  gold1,
   heart_blue,
   heart_red,
   hole, //A bottom tile, the stuff you cannot stand on (but can fall though), the stuff where a wall cannot be built on
@@ -28,8 +30,8 @@ enum class texture_type
   imp_blue_right_1,
   imp_blue_right_2,
   question_mark, //To indicate something went wrong
-  wall,
-  water //A bottom tile, the stuff you cannot stand on (but swim through), the stuff where a wall cannot be built on
+  wall1, //A pile of rocks that can be mined
+  water1 //A bottom tile, the stuff you cannot stand on (but swim through), the stuff where a wall cannot be built on
 };
 
 
@@ -61,8 +63,5 @@ texture_type get_texture_type_red(
 texture_type get_other_texture_type(
   const texture_type t
 );
-
-///Is 16x16 pixels
-bool is_small(const texture_type t) noexcept;
 
 #endif // TEXTURE_TYPE_H

@@ -8,7 +8,7 @@ SOURCES += ../STP/extlibs/pugixml/*.*
 
 SOURCES += main_stp.cpp
 
-QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra #-Werror
+QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -Werror
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 LIBS += -lboost_unit_test_framework

@@ -28,7 +28,7 @@ void behave(monster& m, landscape& s)
   const int col{((m.x() + 16) / 32) + m.dx()};
   const int row{((m.y() + 16) / 32) + m.dy()};
   if (m.type() == monster_type::imp
-    && s.get_top(col, row) == texture_type::wall
+    && s.get_top(col, row) == texture_type::wall1
     && (s.get_selectedness(col, row) & (m.master() == player::red ? 1 : 2)) //Only mine selected squares
   )
   {

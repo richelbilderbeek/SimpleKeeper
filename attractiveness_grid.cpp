@@ -1,5 +1,6 @@
 #include "attractiveness_grid.h"
 
+#include <stdexcept>
 #include <sstream>
 
 attractiveness_grid create_attractiveness_grid(const int n_cols, const int n_rows)

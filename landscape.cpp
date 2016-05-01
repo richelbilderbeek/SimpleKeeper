@@ -18,8 +18,8 @@ landscape::landscape(const int n_cols, const int n_rows)
   {
     for (int x{0}; x!=n_cols; ++x)
     {
-      m_top[y][x] = texture_type::wall;
-      m_bottom[y][x] = texture_type::floor;
+      m_top[y][x] = texture_type::wall1;
+      m_bottom[y][x] = texture_type::floor1;
     }
   }
   /*
@@ -106,7 +106,6 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
       const auto t = get_bottom(x,y);
       sf::Sprite sprite;
       sprite.setTexture(ts.get(t));
-      if (is_small(t)) { sprite.setScale(2.0,2.0); }
       sprite.setPosition(x * block_width, y * block_height);
       w.draw(sprite);
     }
@@ -121,7 +120,6 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
       if (t == texture_type::empty) continue;
       sf::Sprite sprite;
       sprite.setTexture(ts.get(t));
-      if (is_small(t)) { sprite.setScale(2.0,2.0); }
       sprite.setPosition(x * block_width, y * block_height);
       w.draw(sprite);
     }
@@ -155,7 +153,7 @@ void landscape::draw(sf::RenderWindow& w, const textures& ts) const
     for (int x{0}; x!=n_cols; ++x)
     {
       const auto top = get_top(x,y);
-      if (top != texture_type::wall) continue;
+      if (top != texture_type::wall1) continue;
 
       const auto t = get_selectedness(x,y);
       if (t == 0) continue;
@@ -265,7 +263,7 @@ void landscape::update_attractivenesses() noexcept
     for (int x{0}; x!=n_cols; ++x)
     {
       const auto top = get_top(x,y);
-      if (top != texture_type::wall) continue;
+      if (top != texture_type::wall1) continue;
 
       const auto t = get_selectedness(x,y);
       if (t == 0) continue;
