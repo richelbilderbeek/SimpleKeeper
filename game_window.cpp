@@ -40,10 +40,13 @@ game_window::game_window(
     throw std::invalid_argument(msg.str());
   }
 
-  static sf::Music music;
-  music.openFromFile("../SimpleKeeper/Sound/Underworld.wav");
-  music.setLoop(true);
-  music.play();
+  if (!"Music")
+  {
+    static sf::Music music;
+    music.openFromFile("../SimpleKeeper/Sound/Underworld.wav");
+    music.setLoop(true);
+    music.play();
+  }
 }
 
 void game_window::execute()

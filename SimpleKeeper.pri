@@ -10,7 +10,8 @@ SOURCES += \
     textures.cpp \
     texture_type.cpp \
     attractiveness_grid.cpp \
-    $$PWD/game_window.cpp
+    $$PWD/game_window.cpp \
+    grid_coordinat.cpp
 
 RESOURCES += \
     SimpleKeeper.qrc
@@ -27,4 +28,5 @@ HEADERS += \
     textures.h \
     texture_type.h \
     attractiveness_grid.h \
-    $$PWD/game_window.h
+    $$PWD/game_window.h \
+    grid_coordinat.h

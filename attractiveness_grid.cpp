@@ -1,9 +1,14 @@
 #include "attractiveness_grid.h"
 
+#include <cassert>
 #include <stdexcept>
 #include <sstream>
 
-attractiveness_grid create_attractiveness_grid(const int n_cols, const int n_rows)
+attractiveness_grid create_attractiveness_grid(
+  const int n_cols,
+  const int n_rows,
+  const int initial_value
+)
 {
   if (n_rows == 0)
   {
@@ -17,10 +22,10 @@ attractiveness_grid create_attractiveness_grid(const int n_cols, const int n_row
     msg << __func__ << ": grid must have columns";
     throw std::invalid_argument(msg.str());
   }
-  return attractiveness_grid(n_rows, std::vector<double>(n_cols, 0.0));
+  return attractiveness_grid(n_rows, std::vector<int>(n_cols, initial_value));
 }
 
-void diffuse(attractiveness_grid& g, const double d)
+void diffuse(std::vector<std::vector<double>>& g, const double d)
 {
   if (d <= 0.0 || d >= 1.0)
   {
@@ -28,7 +33,7 @@ void diffuse(attractiveness_grid& g, const double d)
     msg << __func__ << ": diffusion must be in range <0,1>";
     throw std::invalid_argument(msg.str());
   }
-  const attractiveness_grid original(g);
+  const std::vector<std::vector<double>> original(g);
   const int n_rows{static_cast<int>(g.size())};
   if (n_rows == 0)
   {
@@ -62,7 +67,7 @@ void diffuse(attractiveness_grid& g, const double d)
   }
 }
 
-void dilute(attractiveness_grid& g, const double d)
+void dilute(std::vector<std::vector<double>>& g, const double d)
 {
   if (d <= 0.0 || d >= 1.0)
   {
@@ -91,4 +96,18 @@ void dilute(attractiveness_grid& g, const double d)
       g[y][x] *= d;
     }
   }
+}
+
+int get_grid_cell(const attractiveness_grid& g, const int x, const int y)
+{
+  assert(y >= 0);
+  assert(y < static_cast<int>(g.size()));
+  assert(x >= 0);
+  assert(x < static_cast<int>(g[y].size()));
+  return g[y][x];
+}
+
+int get_grid_cell(const attractiveness_grid& g, const grid_coordinat c)
+{
+  return get_grid_cell(g, get_x(c), get_y(c));
 }

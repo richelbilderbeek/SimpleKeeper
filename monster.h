@@ -10,6 +10,10 @@ struct textures;
 struct landscape;
 namespace sf { struct RenderWindow; }
 
+/*!
+   \brief The monster class
+   Its
+ */
 class monster
 {
 public:

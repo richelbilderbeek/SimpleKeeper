@@ -38,7 +38,7 @@ landscape::landscape(const int n_cols, const int n_rows)
 
   //Initialize attractiveness grids
   {
-    attractiveness_grid g(n_rows, std::vector<double>(n_cols, 0.0));
+    attractiveness_grid g = create_attractiveness_grid(n_cols, n_rows, 0);
     m_attract_blue.insert(std::make_pair(monster_type::imp, g));
     m_attract_red.insert(std::make_pair(monster_type::imp, g));
   }
@@ -88,6 +88,26 @@ bool landscape::can_move(const int x, const int y, const int w, const int h) con
     && get_top(block_right, block_top   ) == texture_type::empty
     && get_top(block_right, block_bottom) == texture_type::empty
   ;
+}
+
+std::vector<grid_coordinat> landscape::collect_selected(const player p) const noexcept
+{
+  const int n_rows = get_n_rows();
+  const int n_cols = get_n_cols();
+  std::vector<grid_coordinat> v;
+
+  //Draw bottom
+  for (int y{0}; y!=n_rows; ++y)
+  {
+    for (int x{0}; x!=n_cols; ++x)
+    {
+      if (is_selected(x, y, p))
+      {
+        v.push_back(create_grid_coordinat(x,y));
+      }
+    }
+  }
+  return v;
 }
 
 
@@ -207,6 +227,11 @@ int landscape::get_selectedness(const int col, const int row) const
   return m_selected[row][col];
 }
 
+texture_type landscape::get_top(const grid_coordinat& c) const
+{
+  return get_top(get_x(c), get_y(c));
+}
+
 texture_type landscape::get_top(const int x, const int y) const
 {
   assert(y >= 0);
@@ -226,6 +251,21 @@ int landscape::get_n_cols() const noexcept
 int landscape::get_n_rows() const noexcept
 {
   return static_cast<int>(m_bottom.size());
+}
+
+bool landscape::is_selected(const grid_coordinat& c, const player p) const
+{
+  return is_selected(get_x(c), get_y(c), p);
+}
+
+bool landscape::is_selected(const int x, const int y, const player p) const
+{
+  assert(y >= 0);
+  assert(y < static_cast<int>(m_selected.size()));
+  assert(x >= 0);
+  assert(x < static_cast<int>(m_selected[y].size()));
+  const auto s = m_selected[y][x];
+  return s & (p == player::red ? 1 : 2);
 }
 
 void landscape::set_selectedness(const int x, const int y, const int selectedness)
@@ -253,33 +293,41 @@ void landscape::set_top(const int x, const int y, const texture_type t)
 
 void landscape::update_attractivenesses() noexcept
 {
-
-  auto& a_blue = (*m_attract_blue.find(monster_type::imp)).second;
-  auto& a_red  = (*m_attract_red.find(monster_type::imp)).second;
-  const int n_cols{get_n_cols()};
-  const int n_rows{get_n_rows()};
-  for (int y{0}; y!=n_rows; ++y)
+  //Imps
+  for (const auto p: { player::blue, player::red })
   {
-    for (int x{0}; x!=n_cols; ++x)
+    std::vector<grid_coordinat> todo = collect_selected(p); //Coordinats to check
+    const int initial_value{-1 * get_n_cols() * get_n_rows()};
+    assert(initial_value < 0);
+    const int n_cols{get_n_cols()};
+    const int n_rows{get_n_rows()};
+    attractiveness_grid g = create_attractiveness_grid(n_cols, n_rows, initial_value);
+    int a = 255; //attractiveness
+    while (!todo.empty())
     {
-      const auto top = get_top(x,y);
-      if (top != texture_type::wall1) continue;
+      //Find the adjacent squares that are not walls
+      std::vector<grid_coordinat> new_todos;
+      for (const auto c: todo)
+      {
+        //Check all neighbors 'd'
+        for (const auto d: { get_above(c, n_rows), get_right(c, n_rows), get_below(c, n_rows), get_left(c, n_rows)})
+        {
+          if (get_top(d) == texture_type::empty && get_grid_cell(g, d) < a) { new_todos.push_back(d); }
+        }
+      }
+      //Replace the old by the new TODO's
+      todo = new_todos;
+      //Set the attractivenesses of the current todo's
+      for (const auto c: todo)
+      {
 
-      const auto t = get_selectedness(x,y);
-      if (t == 0) continue;
-      if (t & 1)
-      {
-        a_red[y][x] = 1.0;
+        assert(get_y(c) >= 0 && get_y(c) < static_cast<int>(g.size()));
+        assert(get_x(c) >= 0 && get_x(c) < static_cast<int>(g[get_y(c)].size()));
+        g[get_y(c)][get_x(c)] = a;
       }
-      if (t & 2)
-      {
-        a_blue[y][x] = 1.0;
-      }
+      --a;
     }
+    auto& prev_g = (*(p == player::blue ? m_attract_blue : m_attract_red).find(monster_type::imp)).second;
+    prev_g = g;
   }
-  diffuse(a_blue, 0.1);
-  diffuse(a_red, 0.1);
-  dilute(a_blue, 0.9);
-  dilute(a_red, 0.9);
-
 }
