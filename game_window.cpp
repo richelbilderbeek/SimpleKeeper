@@ -1,5 +1,6 @@
 #include "game_window.h"
 
+#include <cassert>
 #include <sstream>
 #include <stdexcept>
 #include <SFML/System/Clock.hpp>
@@ -7,6 +8,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Audio/Music.hpp>
 #include "game.h"
+#include "helper.h"
 
 game_window::game_window(
   const int window_width,
@@ -40,10 +42,12 @@ game_window::game_window(
     throw std::invalid_argument(msg.str());
   }
 
-  if (!"Music")
+  if ("Music")
   {
     static sf::Music music;
-    music.openFromFile("../SimpleKeeper/Sound/Underworld.wav");
+    const std::string file_name{"../SimpleKeeper/Sound/Underworld.wav"};
+    assert(is_regular_file(file_name));
+    music.openFromFile(file_name);
     music.setLoop(true);
     music.play();
   }

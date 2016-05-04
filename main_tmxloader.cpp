@@ -1,15 +1,14 @@
+
 #include "SFML/Graphics.hpp"
-#include "STP/TMXLoader.hpp"
+#include "tmx/MapLoader.h"
+
 
 int main()
 {
   sf::RenderWindow window(sf::VideoMode(360, 280), "STP Example");
-  tmx::TileMap map("~/GitHubs/SimpleKeeper/Maps/simple.tmx");
-  //tmx::TileMap map("~/GitHubs/tiled/examples/orthogonal-outside.tmx");
-
-  map.ShowObjects(); // Display all the layer objects.
-
-  map.GetLayer("World").visible = false; // Hide a Layer named World
+  tmx::MapLoader map("~/GitHubs/SimpleKeeper/Maps");
+  map.Load("simple.tmx");
+  //tmx::MapLoader map("~/GitHubs/tiled/examples/orthogonal-outside.tmx");
 
   // Start the game loop
   while (window.isOpen()) {
