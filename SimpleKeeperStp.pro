@@ -15,3 +15,5 @@ LIBS += -lboost_unit_test_framework
 
 # zlib
 LIBS += -lz
+
+LIBS += -lpugixml
