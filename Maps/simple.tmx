@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="floor" tilewidth="32" tileheight="32" tilecount="2" columns="0">
+ <tileset firstgid="1" name="floor" tilewidth="32" tileheight="32" tilecount="2">
   <tile id="0">
    <image width="32" height="32" source="../Sprites/Floor1.png"/>
   </tile>
@@ -8,7 +8,7 @@
    <image width="32" height="32" source="../Sprites/Water1.png"/>
   </tile>
  </tileset>
- <tileset firstgid="3" name="top" tilewidth="32" tileheight="32" tilecount="4" columns="0">
+ <tileset firstgid="3" name="top" tilewidth="32" tileheight="32" tilecount="4">
   <tile id="0">
    <image width="32" height="32" source="../Sprites/Gems1.png"/>
   </tile>
