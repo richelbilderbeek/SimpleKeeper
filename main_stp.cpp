@@ -24,6 +24,7 @@ int main()
   }
 
   sf::RenderWindow window(sf::VideoMode(360, 280), "STP Example");
+<<<<<<< HEAD
   //const std::string filename{"/home/richel/GitHubs/SimpleKeeper/Maps/simple.tmx"};
   //const std::string filename{"orthogonal-outside.tmx"};
   const std::string filename{"simple.tmx"};
@@ -31,10 +32,14 @@ int main()
 
   tmx::TileMap map(filename);
   //tmx::TileMap map("~/GitHubs/tiled/examples/orthogonal-outside.tmx");
+=======
+  //tmx::TileMap map("~/GitHubs/SimpleKeeper/Maps/simple.tmx");
+  tmx::TileMap map("orthogonal-outside.tmx");
+>>>>>>> 357ed28da927a46218411316a1dd4356721d6009
 
   map.ShowObjects(); // Display all the layer objects.
 
-  map.GetLayer("World").visible = false; // Hide a Layer named World
+  //map.GetLayer("World").visible = false; // Hide a Layer named World
 
   // Start the game loop
   while (window.isOpen()) {

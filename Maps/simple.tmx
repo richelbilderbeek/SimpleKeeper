@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="floor" tilewidth="32" tileheight="32" tilecount="2">
+=======
+<map version="1.0" orientation="orthogonal" width="30" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="floor" tilewidth="32" tileheight="32">
+>>>>>>> 357ed28da927a46218411316a1dd4356721d6009
   <tile id="0">
-   <image width="32" height="32" source="../Sprites/Floor1.png"/>
+   <image format="png">
+    <data encoding="base64">iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNC0yOFQxODoyNjoyMyswMjowMA11KdMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDQtMjhUMTg6MjY6MjMrMDI6MDB8KJFvAAAAVElEQVRYhe3XsQ3AIAwF0SPKrDCTWdYpQDTpLYq7Bfz0OzciEoDeKW1OAJ7aq/8amWuBLSprDOCCBQQIECBAgAABAgQIECBAwHt+wv2rlRUBXLDAB643DKUOWT00AAAAAElFTkSuQmCC</data>
+   </image>
   </tile>
   <tile id="1">
-   <image width="32" height="32" source="../Sprites/Water1.png"/>
+   <image format="png">
+    <data encoding="base64">iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNC0yOFQxODoyNjoyMyswMjowMA11KdMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDQtMjhUMTg6MjY6MjMrMDI6MDB8KJFvAAAAMUlEQVRYhe3OMQEAAAjDsIEl/GsDGTypgaZmdvNYf84BAAAAAAAAAAAAAAAAAACS5ACbZgKkRU6L2wAAAABJRU5ErkJggg==</data>
+   </image>
   </tile>
  </tileset>
+<<<<<<< HEAD
  <tileset firstgid="3" name="top" tilewidth="32" tileheight="32" tilecount="4">
+=======
+ <tileset firstgid="3" name="top" tilewidth="32" tileheight="32">
+>>>>>>> 357ed28da927a46218411316a1dd4356721d6009
   <tile id="0">
-   <image width="32" height="32" source="../Sprites/Gems1.png"/>
+   <image format="png">
+    <data encoding="base64">iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNC0yOFQxODoyNjoyMyswMjowMA11KdMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDQtMjhUMTg6MjY6MjMrMDI6MDB8KJFvAAAAiklEQVRYhe2WQQrAIAwEtY/Nn8xn7cGKJZBW0hQj7Fx66YJOVDanUmqywNS+xKZ4zx+2tB851doMsNjJ7A7p+s+YD2DAegacWG5gLIBpzO0JojH3O8b8cgPvZ8Dpvmv5DQxInI0ENPDzzCUBDWhob/4sSn4jAxL0gQ76wEeWG0AfQB9AH0AfQB84AVjUY0GNkyzeAAAAAElFTkSuQmCC</data>
+   </image>
   </tile>
   <tile id="1">
-   <image width="32" height="32" source="../Sprites/Gold1.png"/>
+   <image format="png">
+    <data encoding="base64">iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNC0yOFQxODoyNjoyMyswMjowMA11KdMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDQtMjhUMTg6MjY6MjMrMDI6MDB8KJFvAAAAjUlEQVRYhe2WwQ2AIAxFiyu5k85UdmImPGhsIKCk1LQmfRcP5if6WsgPGSEDgxTP57px0pRfeHE5Qka8DOzFi/E/RJjJWzDA2wEp1A3cH5Aize0ZBJo7wc2rG3jdAanz3svbN1AjbcSega9nXmPPQJ/2nT9OO/8nAyXeBwjvA3OoG/A+4H3A+4D3Ae8DB6DFY0NWVZLbAAAAAElFTkSuQmCC</data>
+   </image>
   </tile>
   <tile id="2">
-   <image width="32" height="32" source="../Sprites/Wall1.png"/>
+   <image format="png">
+    <data encoding="base64">iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNC0yOFQxODoyNjoyMyswMjowMA11KdMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDQtMjhUMTg6MjY6MjMrMDI6MDB8KJFvAAAAj0lEQVRYhe2W0Q2AIAwFiyuxU3eiOzkTfijVkFRJraEmvV/yErgCeQlKqaAgEwEAwIqoiXN+UaUNSVDrbuDYUWP4hG1dmXdgQHkHrJhugDeQiXhutyCec7+gzU838HgHrN67lPdvoMfaiD8DX8+8x58BEeHPH0bI/8hAR/QBJvrAS6YbiD4QfSD6QPSB6AMb2RR5R29L31cAAAAASUVORK5CYII=</data>
+   </image>
   </tile>
   <tile id="3">
-   <image width="32" height="32" source="../Sprites/Transparent.png"/>
+   <image format="png">
+    <data encoding="base64">iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNi0wNC0yOFQxODoyNjoyMyswMjowMA11KdMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDQtMjhUMTg6MjY6MjMrMDI6MDB8KJFvAAAAGklEQVRYhe3BAQEAAACCIP+vbkhAAQAAAO8GECAAAUcBoIgAAAAASUVORK5CYII=</data>
+   </image>
   </tile>
  </tileset>
- <layer name="Floor" width="30" height="20">
+ <layer name="Floor" width="30" height="20" visible="0">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -49,10 +70,10 @@
  <layer name="Top" width="30" height="20">
   <data encoding="csv">
 5,5,5,5,5,5,5,5,5,5,5,5,4,4,6,6,6,4,4,5,5,5,5,5,5,5,5,5,5,5,
-5,5,5,5,5,5,5,5,5,5,5,4,4,4,5,6,5,4,4,4,5,5,5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5,5,4,4,4,3,6,3,4,4,4,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,
-5,5,5,5,5,5,5,5,5,5,5,4,4,4,5,6,5,4,4,4,5,5,5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5,5,4,4,4,3,6,3,4,4,4,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,4,4,6,6,6,4,4,5,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,4,4,6,6,6,4,4,5,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,4,4,6,6,6,4,4,5,5,6,6,6,6,6,5,5,5,5,
@@ -63,10 +84,10 @@
 5,5,5,5,5,6,6,6,6,6,5,5,4,4,6,6,6,4,4,5,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,4,4,6,6,6,4,4,5,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,4,4,6,6,6,4,4,5,5,5,5,5,5,5,5,5,5,5,
-5,5,5,5,5,5,5,5,5,5,5,4,4,4,5,6,5,4,4,4,5,5,5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5,5,4,4,4,3,6,3,4,4,4,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,
-5,5,5,5,5,5,5,5,5,5,5,4,4,4,5,6,5,4,4,4,5,5,5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,5,5,5,4,4,4,3,6,3,4,4,4,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,4,4,6,6,6,4,4,5,5,5,5,5,5,5,5,5,5,5
 </data>
  </layer>
