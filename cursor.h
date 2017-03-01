@@ -9,7 +9,7 @@ namespace sf { struct RenderWindow; }
 
 struct cursor
 {
-  cursor() {}
+  cursor() : m_pos{}, m_color{} {}
   sf::Vector2i m_pos;
   sf::Color m_color;
 };

@@ -18,6 +18,7 @@ game_window::game_window(
   const std::string& window_title
 ) : m_game{create_default_game(window_width / 32, window_height / 32)},
     m_poll_time_msecs{poll_time_msecs},
+    m_start_time{},
     m_stop_condition{stop_condition},
     m_window_height{window_height},
     m_window_title{window_title},
