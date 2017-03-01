@@ -3,12 +3,12 @@
 
 #include <vector>
 #include "grid_coordinat.h"
-using attractiveness_grid = std::vector<std::vector<int>>;
+using attractiveness_grid = std::vector<std::vector<double>>;
 
 attractiveness_grid create_attractiveness_grid(
   const int n_cols,
   const int n_rows,
-  const int initial_value = 0
+  const double initial_value = 0.0
 );
 
 int get_grid_cell(const attractiveness_grid& g, const int x, const int y);

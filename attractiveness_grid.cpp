@@ -7,7 +7,7 @@
 attractiveness_grid create_attractiveness_grid(
   const int n_cols,
   const int n_rows,
-  const int initial_value
+  const double initial_value
 )
 {
   if (n_rows == 0)
@@ -22,7 +22,7 @@ attractiveness_grid create_attractiveness_grid(
     msg << __func__ << ": grid must have columns";
     throw std::invalid_argument(msg.str());
   }
-  return attractiveness_grid(n_rows, std::vector<int>(n_cols, initial_value));
+  return attractiveness_grid(n_rows, std::vector<double>(n_cols, initial_value));
 }
 
 void diffuse(std::vector<std::vector<double>>& g, const double d)

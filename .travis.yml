@@ -40,15 +40,10 @@ script:
   - qmake -qt=qt5 SimpleKeeper.pro
   - make
   - ./SimpleKeeper &
-  # Build and run QTest
-  - qmake -qt=qt5 travis_qmake_gcc_cpp14_boost_test_gcov_oclint_qt5_qtest_qtest.pro
+  # SimpleKeeper
+  - qmake -qt=qt5 SimpleKeeperTest.pro
   - make
-  - ./travis_qmake_gcc_cpp14_boost_test_gcov_oclint_qt5_qtest_qtest
-  # Build and run 'real' program
-  - qmake -qt=qt5 travis_qmake_gcc_cpp14_boost_test_gcov_oclint_qt5_qtest.pro
-  - make
-  - ./travis_qmake_gcc_cpp14_boost_test_gcov_oclint_qt5_qtest &
-  - sudo killall -9 travis_qmake_gcc_cpp14_boost_test_gcov_oclint_qt5_qtest
+  - ./SimpleKeeperTest
   # Get code coverage
   - ./get_code_cov
   - codecov
