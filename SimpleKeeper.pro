@@ -3,13 +3,11 @@ SOURCES += main.cpp
 
 # C++14
 CONFIG += c++14
-QMAKE_CXX = g++-5
-QMAKE_LINK = g++-5
-QMAKE_CC = gcc-5
 QMAKE_CXXFLAGS += -std=c++14
 
 # High warning levels
-QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -Weffc++ -Werror
+# Qt does not go well with -Weffc++
+QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -Werror
 
 # Debug and release mode
 CONFIG += debug_and_release
@@ -18,6 +16,13 @@ CONFIG += debug_and_release
 CONFIG(release, debug|release) {
 
   DEFINES += NDEBUG
+
+  # gprof
+  QMAKE_CXXFLAGS += -pg
+  QMAKE_LFLAGS += -pg
+
+  # GSL
+  DEFINES += GSL_UNENFORCED_ON_CONTRACT_VIOLATION
 }
 
 # In debug mode, turn on gcov and UBSAN
@@ -31,10 +36,23 @@ CONFIG(debug, debug|release) {
   QMAKE_CXXFLAGS += -fsanitize=undefined
   QMAKE_LFLAGS += -fsanitize=undefined
   LIBS += -lubsan
+
+  # gprof
+  QMAKE_CXXFLAGS += -pg
+  QMAKE_LFLAGS += -pg
+
+  # GSL
+  #DEFINES += GSL_THROW_ON_CONTRACT_VIOLATION
+  DEFINES += GSL_UNENFORCED_ON_CONTRACT_VIOLATION
 }
 
-# No Qt
-QT -= core gui
+# Qt
+QT += core gui
+
+# Prevent Qt for failing with this error:
+# qrc_[*].cpp:400:44: error: ‘qInitResources_[*]__init_variable__’ defined but not used
+# [*]: the resource filename
+QMAKE_CXXFLAGS += -Wno-unused-variable
 
 # Fixes
 #/usr/include/boost/math/constants/constants.hpp:277: error: unable to find numeric literal operator 'operator""Q'
