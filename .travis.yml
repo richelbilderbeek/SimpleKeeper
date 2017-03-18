@@ -19,6 +19,9 @@ install:
   # Qt5
   - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
   - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+  # SFML
+  - sudo apt-get install libsfml-dev
+  - sudo apt-get install ffmpeg
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # Codecov
