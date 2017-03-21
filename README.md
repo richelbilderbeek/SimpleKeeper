@@ -1,5 +1,10 @@
 # SimpleKeeper
 
+Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
+---|---|---
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/SimpleKeeper.svg?branch=master)](https://travis-ci.org/richelbilderbeek/SimpleKeeper)|[![codecov.io](https://codecov.io/github/richelbilderbeek/SimpleKeeper/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/SimpleKeeper/branch/master)
+develop|[![Build Status](https://travis-ci.org/richelbilderbeek/SimpleKeeper.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/SimpleKeeper)|[![codecov.io](https://codecov.io/github/richelbilderbeek/SimpleKeeper/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/SimpleKeeper/branch/develop)
+
 Simple Dungeon Keeper clone, written in C++ using SFML.
 
 ![SimpleKeeper v0.9](Screenshots/SimpleKeeper_0_9.png)
