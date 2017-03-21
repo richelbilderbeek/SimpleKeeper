@@ -42,14 +42,14 @@ script:
   - ./create_sprites
   # SimpleKeeper
   - qmake -qt=qt5 SimpleKeeperTest.pro
-  - make
+  - make debug
   - ./SimpleKeeperTest
   # Get code coverage
   - ./get_code_cov >/dev/null
   - codecov >/dev/null
   # SimpleKeeper desktop
   - qmake -qt=qt5 SimpleKeeper.pro
-  - make
+  - make debug
   - ./SimpleKeeper &
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
